@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+const stripe = require("stripe")("sk_test_51KoihiSI4CWCME42CBf87EWspI61cTUhsYgopGEXSW3eqleTi6xoCPo96sc93dwL9hNNjyGeM4ks79rSYCentsbF00pmFNc1kb")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
@@ -33,6 +33,10 @@ const generateResponse = intent => {
 		return { clientSecret: intent.client_secret };
 	}
   };
+
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
 
 app.post("/payment", cors(), async (req, res) => {
 	let { amount, id } = req.body
